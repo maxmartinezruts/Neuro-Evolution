@@ -1,8 +1,3 @@
-// Daniel Shiffman
-// Neuro-Evolution Flappy Bird with TensorFlow.js
-// http://thecodingtrain.com
-// https://youtu.be/cdUNkwXx-I4
-
 class NeuralNetwork {
     constructor(a, b, c, d) {
       if (a instanceof tf.Sequential) {
@@ -67,6 +62,7 @@ class NeuralNetwork {
     }
   
     createModel() {
+      console.log(this.hidden_nodes)
       const model = tf.sequential();
       const hidden = tf.layers.dense({
         units: this.hidden_nodes,
@@ -74,6 +70,7 @@ class NeuralNetwork {
         activation: 'sigmoid'
       });
       model.add(hidden);
+   
       const output = tf.layers.dense({
         units: this.output_nodes,
         activation: 'softmax'
