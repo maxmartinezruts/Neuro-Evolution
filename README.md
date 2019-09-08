@@ -1,6 +1,10 @@
 Author: Max Martinez Ruts
 Note: This file contains a description of an experiment of the use of neuroevolution. The complete report together with the results of the experiments can be found in [report](neuroevolution.pdf).
 
+See full animation showing the neuroevolution process during 15 generations: https://www.youtube.com/watch?v=u7ZbhkiOcdY
+![](neuroevolution.gif)
+
+
 # Abstract
 Neuroevolution techniques have been successfully applied in many reinforcement learning tasks. This
 study aims at determining whether a neuroevolution method can be used to determine a stable tripleintegrator artificial vehicle controller system with the presence of a disturbing force. Control vehicles
