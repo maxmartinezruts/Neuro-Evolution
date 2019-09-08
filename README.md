@@ -1,5 +1,5 @@
 Author: Max Martinez Ruts
-Note: This file contains a description of an experiment of the use of neuroevolution. The complete report together with the results of the experiments can be found in [report](neuroevolution_report.pdf).
+Note: This file contains a description of an experiment of the use of neuroevolution. The complete report together with the results of the experiments can be found in [report](neuroevolution.pdf).
 
 # Abstract
 Neuroevolution techniques have been successfully applied in many reinforcement learning tasks. This
