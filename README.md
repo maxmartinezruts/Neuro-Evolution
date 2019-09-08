@@ -1,4 +1,5 @@
 Author: Max Martinez Ruts
+Note: This file contains a description of an experiment of the use of neuroevolution. The complete report together with the results of the experiments can be found in [report](neuroevolution_report.pdf).
 
 # Abstract
 Neuroevolution techniques have been successfully applied in many reinforcement learning tasks. This
@@ -114,7 +115,7 @@ consisting of 6 nodes is also present to and depth - and therefore complexity - 
 order to account for non-linearities within the input variables to predict the system’s behavior, the activation
 function of the hidden and output layers are sigmoid functions, (used for probabilistic examples, as it outputs
 values from 0 to 1). The outputs are then maped from [0,1] to [-0.5,0.5] to obtain an unbiased jerk input.
-Figure 1 displays the topology of the ANN to be used.
+Figure 'Network Topology' displays the topology of the ANN to be used.
 
 The neural network can, therefore, be seen as a function that inputs the position, velocity, and acceleration of the vehicle, and outputs a change in acceleration. Hence, the problem scenario consists of optimizing
 ANN such that it can precisely determine da to achieve stability.
@@ -125,11 +126,12 @@ also altering the topology of the ANN. This method is referred to as NEAT (Neuro
 Topologies).
 
 <p align="center">
-  <img src="ANN.png" width="350" alt="accessibility text">
+  <img src="ANN.PNG" width="350" alt="accessibility text">
 </p>
+Figure: Network Topology
 
 # Genetic Algorithms
-Genetic Algorithms (GAs) are inspired by Darwins theory of biological evolution [1]. GAs differ from the
+Genetic Algorithms (GAs) are inspired by Darwins theory of biological evolution. GAs differ from the
 rest of optimization methods by the fact that a set of solutions is maintained rather than a singular one.
 GAs are formed by a set of genetically diverse specimens, being evaluated under a certain fitness function.
 Each specimen inherits a likelihood of survival, proportional to its evaluated fitness score. This behavior
@@ -138,7 +140,7 @@ behavior allows species to evolve, as specimens which survive longer are also th
 to reproduce similar copies of themselves, thereby inducing a tendency on the population of subsequent
 generations towards fitter specimens.
 
-GAs are proved to be very effective in many real world and engineering optimization tasks such as electromagnetic system design [5] and aerodynamic design [7]. The reason why it has become widely used and
+GAs are proved to be very effective in many real world and engineering optimization tasks such as electromagnetic system design and aerodynamic design. The reason why it has become widely used and
 effective is due to its simplistic implementation in object-oriented programming. A parallelism is present
 between biological evolution and GAs, populations being sets, specimens being objects, genes being weights
 and biases and brains being ANNs. One could think of this parallelism by comparing the biological approach:
@@ -172,7 +174,7 @@ d_score = e<sup>−(pos−center)*2</sup>
 This ensures that only vehicles close to the center of the screen will be awarded a significant fitness score (see Gaussian Function Figure)
 
 <p align="center">
-  <img src="gaussian.png" width="200" alt="accessibility text">
+  <img src="gaussian.PNG" width="200" alt="accessibility text">
 </p>
 Figure: Gaussian Function
 
@@ -279,4 +281,39 @@ function mutation(genotypes, mutation rate)<br/>
 ...............gene ← gene + random normal<br/>
 ..........end if<br/>
 ...end for<br/>
+
+# Backpropagation vs GAs for ANN optimization
+In Neural-Network optimization, backpropagation is the most common approach. Backpropagation is a gradient search technique. Such technique is based on dtermining the optimal direction in the domain space
+(weights and biases) such that the loss is minimized, by the use of the chain rule. The loss function is defined
+as the distance between the output of the neural network and the desired output. To use backpropagation
+it is, therefore, necessary to label the outpus, as the loss function is the distance from the labeled outputs
+to the resulting outputs This limits the use of backpropagation to supervised learning, as it is not possible
+to optimize the neural network if the solution (output) is not known in advance. Moreover, gradient descent
+techniques guarantee the best solution in the region of the starting point. Obtaining a global solution is
+therefore dependent on the choice of initial starting values.
+
+GAs tend to produce global solutions (see [6]). Specimens in a global solution are fitter than specimens
+in a local solution, thereby inducing a tendency on the population towards global solutions. Due to this
+behavior, GAs typically outperform backpropagation for very non-linear problems as described in [4], as
+gradient descent tends to produce local solutions due to the loss function being hilly among the search
+space. In GAs, instead, if the population size is kept high and the diversity of the population is high enough
+such that a broad space can be covered, a global solution is encountered. Another essential advantage
+over backpropagation is that GAs can be used for unsupervised learning and reinforcement learning as described in [2], as it is not based on a loss function (dependent on the desired output) but on a fitness function
+which is rather dependent on the performance achieved by processing the input (state) to an output (action).
+
+The previous reasoning leaves GAs to be the best fit for the problem scenario, as the solution to the
+problem requires reinforcement learning and that the domain space is rather non-linear. But why is the case
+that this scenario requires reinforcement learning?
+
+The proposed problem lies in a scenario where the neural network has as inputs (p,v and a) and output
+(da). However, given the inputs, the best output cannot be directly determined, as it is difficult to determine
+if the action will produce a good or a bad result in order to achieve stability. In other words, a loss function
+cannot be determined. This is because an acceleration change will not produce a direct result in the stability
+of the object. The stability will be rather achieved by a sequence of good acceleration changes. Therefore
+singular acceleration change wont have a direct result on the stability of the object, but rather a chaotic
+one. It is for this reason why an output cannot be directly compared to the desired output, precluding
+the determination of a loss function and therefore precluding supervised learning. A similar situation is
+encountered in chess. One can not train a supervised neural network by determining which is the best move
+to do in a certain situation, as the effectuation of a move will not have an instant result on the game but
+rather a chaotic one that will affect the result of the game in the future.
 
